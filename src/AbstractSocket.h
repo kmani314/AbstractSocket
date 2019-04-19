@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include "unistd.h"
+#include <string>
 
 typedef struct sockaddr_in sockaddr_in;
 
@@ -15,15 +16,15 @@ class AbstractSocket {
 	int descriptor;
 	int connectedSocket = -1;
 
-	int socketOption;
+	int socketOption = 1;
 	
 	sockaddr_in address;
 	
 	public:
-	AbstractSocket(int);
+	AbstractSocket();
 
 	void listen(int, int);
-	void connect(int, const char*);
+	void connect(int, std::string);
 	
 	void waitForConnection();
 

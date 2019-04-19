@@ -1,7 +1,7 @@
 #include "AbstractSocket.h"
 #include "SocketException.h"
 
-AbstractSocket::AbstractSocket(int _socketOption) : socketOption(_socketOption) {
+AbstractSocket::AbstractSocket() {
 	descriptor = socket(AF_INET, SOCK_STREAM, 0); // TCP socket using IPv4
 
 	if(descriptor < 0) throw SocketException("Socket could not be created!"); // Some socket creation error
@@ -22,13 +22,13 @@ void AbstractSocket::listen(int portNumber, int maxQueue) { // listen on port
 	if(::listen(descriptor, maxQueue) < 0) throw SocketException("Socket could not listen.");
 }
 
-void AbstractSocket::connect(int portNumber, const char* hostAddr) { // connect to remote host
+void AbstractSocket::connect(int portNumber, std::string hostAddr) { // connect to remote host
 	memset(&address, '0', sizeof(address));
 	
 	address.sin_family = AF_INET;
 	address.sin_port = htons(portNumber); // network order
 
-	if(inet_pton(AF_INET, hostAddr, &address.sin_addr) <= 0) throw SocketException("Connection Address Invalid.");
+	if(inet_pton(AF_INET, hostAddr.c_str(), &address.sin_addr) <= 0) throw SocketException("Connection Address Invalid.");
 
 	if(::connect(descriptor, (struct sockaddr*)&address, sizeof(address)) < 0) throw SocketException("Failed to connect.");
 
