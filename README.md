@@ -1,7 +1,7 @@
-#AbstractSocket
+# AbstractSocket
 AbstractSocket is an easy to use way to interface with TCP Sockets with modern exception handling (no more errno).
 
-###Server Example:
+### Server Example:
 ```c++
 try {
 	AbstractSocket mySocket(1); // Constructor Argument is what to set SO_REUSEADDR to (useful when dealing with local addresses)
@@ -17,7 +17,7 @@ try {
 	std::cout << e.what() << std::endl;
 }
 ```
-###Client Example:
+### Client Example:
 ```c++
 try {
 	AbstractSocket mySocket(1);
