@@ -4,7 +4,7 @@ AbstractSocket is an easy to use way to interface with TCP Sockets with modern e
 ### Server Example:
 ```c++
 try {
-	AbstractSocket mySocket(1); // Constructor Argument is what to set SO_REUSEADDR to (useful when dealing with local addresses)
+	AbstractSocket mySocket(); 
 
 	mySocket.listen(8080, 10); // Attach to port 8080 with a max connection queue of 10
 
@@ -20,7 +20,7 @@ try {
 ### Client Example:
 ```c++
 try {
-	AbstractSocket mySocket(1);
+	AbstractSocket mySocket();
 	
 	mySocket.connect(8080, "127.0.0.1"); // Connect to 127.0.0.1 on port 8080
 	char buf[256] = {0};
