@@ -51,7 +51,7 @@ int AbstractSocket::write(const void* buf, int len) { // write len bytes from bu
 int AbstractSocket::read(void* buf, int len) { // read len bytes from socket into buf
 	int read;
 
-	if((read = ::read(connectedSocket, buf, len)) <= 0) throw SocketException("Could not read len bytes from descriptor.");
+	if((read = recv(connectedSocket, buf, len, MSG_WAITALL)) < 0) throw SocketException("Could not read len bytes from descriptor.");
 	
 	return read; // return number of bytes read
 }
